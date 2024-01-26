@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Servlet学习-🧠</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/dragon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="java,Servlet,">
+<meta name="description" content="Servlet学习过程">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/dragon.png" alt="Quiet">
+				</a>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										文档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/links">
+										友情链接
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										我
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>SoftLipa</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">文档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/links">友情链接</a>
+        </li>
+        
+        <li>
+            <a href="/about">我</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    style="background: url('https://tu.ltyuanfang.cn/api/fengjing.php')" 
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+            
+            <li><a href="/tags/java">java</a></li>
+            
+            <li><a href="/tags/Servlet">Servlet</a></li>
+            
+            
+        </ul>
+        
+        <h1>Servlet学习</h1>
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                    
+                <span class="post-header-info-author-text"> <a href="../../about">SoftLipa</a></span>
+                <div class="post-header-info-author-categories">
+                    
+                         <a href="../../categories/Servlet/" target="_blank" >Servlet</a>
+                    
+                </div>
+                <p>2024-01-08 09:33:36</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+
+    <h2 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h2><h3 id="1-Servlet技术"><a href="#1-Servlet技术" class="headerlink" title="1.Servlet技术"></a>1.Servlet技术</h3><h4 id="（1）what"><a href="#（1）what" class="headerlink" title="（1）what?"></a><strong>（1）what?</strong></h4><ul>
+<li>JavaEE规范。</li>
+<li>JavaWeb三大组件之一：除此还有Filter过滤器，Listener监听器。</li>
+<li>运行在服务器上的一个Java小程序，可以接收客户端发送过来的请求，并响应数据给客户端。</li>
+</ul>
+<h4 id="2-如何手动实现？"><a href="#2-如何手动实现？" class="headerlink" title="(2)如何手动实现？"></a><strong>(2)如何手动实现？</strong></h4><ol>
+<li>编写一个类去实现Servlet接口。</li>
+<li>实现service方法，处理请求，并响应数据</li>
+<li><strong>到web.xml中去配置servlet程序的访问地址。</strong></li>
+</ol>
+<p>相关依赖导入</p>
+<pre><code>&lt;!-- servlet依赖的jar包 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+    &lt;version&gt;3.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- servlet依赖的jar包start --&gt;
+&lt;!-- jsp依赖jar包start --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+    &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+    &lt;version&gt;2.3.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- jsp依赖jar包end --&gt;
+&lt;!--jstl标签依赖的jar包start --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+    &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+    &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>测试：实现Servlet接口，</p>
+<pre><code> public void init(ServletConfig servletConfig) throws ServletException &#123;
+
+    &#125;
+
+    public ServletConfig getServletConfig() &#123;
+        return null;
+    &#125;
+
+
+    /**
+     * 该方法专门用来处理请求和响应
+     */
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException &#123;
+        System.out.println(&quot;Hello Servlet被访问了&quot;);
+
+    &#125;
+
+    public String getServletInfo() &#123;
+        return null;
+    &#125;
+
+    public void destroy() &#123;
+
+    &#125;
+</code></pre>
+<p>在web.xml中配置路径</p>
+<pre><code>&lt;!--    该标签给Tomcat配置Servlet程序--&gt;
+    &lt;servlet&gt;
+&lt;!--        name标签给Servlet程序起一个别名(一般都是用类名）--&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+&lt;!--        servlet-class是对应Servlet程序的全类名--&gt;
+        &lt;servlet-class&gt;com.fan.servlet.HelloServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+&lt;!--    mapping标签的作用是给程序配置访问地址--&gt;
+    &lt;servlet-mapping&gt;
+&lt;!--        指定使用地址的Servlet程序--&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+&lt;!--        配置访问地址，/在服务器解析时表示地址为：http://ip:port/工程路径
+            /hello表示地址为：http://ip:port/工程路径/hello--&gt;
+        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+</code></pre>
+<h4 id="（3）url地址到Servlet程序的访问"><a href="#（3）url地址到Servlet程序的访问" class="headerlink" title="（3）url地址到Servlet程序的访问"></a>（3）url地址到Servlet程序的访问</h4><p><img src="/" alt="image-20210621155152463"></p>
+<h4 id="（4）Servlet的生命周期"><a href="#（4）Servlet的生命周期" class="headerlink" title="（4）Servlet的生命周期"></a>（4）Servlet的生命周期</h4><ol>
+<li><p>执行Servlet的构造器方法</p>
+</li>
+<li><p>执行Init初始化方法</p>
+<p>这两步只在第一次访问时，创建Servlet程序会调用</p>
+</li>
+<li><p>执行service方法。 （每次访问都会调用）</p>
+</li>
+<li><p>执行destroy方法 ——web工程停止时</p>
+</li>
+</ol>
+<h4 id="（5）GET和POST请求的分发处理"><a href="#（5）GET和POST请求的分发处理" class="headerlink" title="（5）GET和POST请求的分发处理"></a>（5）GET和POST请求的分发处理</h4><p>设置一段代码可以获得请求方式,根据获取的请求方式不同可以做进一步操作。</p>
+<pre><code>/**
+ * 该方法专门用来处理请求和响应
+ */
+public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException &#123;
+    System.out.println(&quot;service——————Hello Servlet被访问了&quot;);
+    //类型转换  HttpServletRequest是ServletRequest的子类型，可以获取请求的方式
+    HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+    //获取请求的方式
+    String method = httpServletRequest.getMethod();
+    if (&quot;GET&quot;.equals(method)) &#123;
+        doGet();
+    &#125; else if (&quot;POST&quot;.equals(method)) &#123;
+        doPost();
+    &#125;
+
+&#125;
+</code></pre>
+<h4 id="（6）通过继承HttpServlet实现Servlet程序"><a href="#（6）通过继承HttpServlet实现Servlet程序" class="headerlink" title="（6）通过继承HttpServlet实现Servlet程序"></a>（6）通过继承HttpServlet实现Servlet程序</h4><p>一般都是这样</p>
+<ol>
+<li>编写一个类去继承HTTPServlet类</li>
+<li>根据业务需要重写doGet或doPost方法</li>
+<li>到web.xml中的配置Servlet程序的访问地址</li>
+</ol>
+<h4 id="IDEA快速创建"><a href="#IDEA快速创建" class="headerlink" title="IDEA快速创建"></a>IDEA快速创建</h4><p>Servlet右键下面找 ，用到了注解@WebServlet,需另外配置urlPattern</p>
+<p><img src="/" alt="image-20210621162003063"></p>
+<pre><code>@WebServlet(name = &quot;HelloServlet3&quot;, urlPatterns = &quot;/idea&quot;)
+public class HelloServlet3 extends HttpServlet &#123;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+        System.out.println(&quot;IDEA创建的Servlet的Post方法&quot;);
+
+    &#125;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException &#123;
+        System.out.println(&quot;IDEA创建的Servlet的GET方法&quot;);
+    &#125;
+&#125;
+</code></pre>
+<h4 id="Http的继承关系"><a href="#Http的继承关系" class="headerlink" title="Http的继承关系"></a>Http的继承关系</h4><p>Servlet接口 负责定义Servlet程序的访问规范</p>
+<p>GenericServlet类 实现了Servlet接口，做许多空实现，并持有一个ServletConfig类的引用 （详见下文笔记）</p>
+<p>HttpServlet类 实现了service方法，并实现了请求的分发处理</p>
+<p>自定义Servlet程序 ————根据自身业务需要重写doGet与doPost即可</p>
+<p>补充:transient关键字 声明一个实例变量，该实例变量可以不被Serialization持久化</p>
+<hr>
+<h3 id="2-ServletConfig"><a href="#2-ServletConfig" class="headerlink" title="2.ServletConfig"></a>2.ServletConfig</h3><p>Servlet的配置信息类</p>
+<p>Servlet程序和ServletConfig对象都是由Tomcat创建，程序员负责使用。 Servlet程序默认是第一次访问时创建，ServletConfig是每个Servlet程序创建时就创建一个对应的config对象</p>
+<h4 id="三个作用"><a href="#三个作用" class="headerlink" title="三个作用"></a>三个作用</h4><ol>
+<li>获取Servlet程序的别名（Servlet-name）的值</li>
+<li>获取初始化参数init-param</li>
+<li>获取ServletContext对象</li>
+</ol>
+<p>Java代码（以最初HelloServlet为例） 仅在初始化方法中配置</p>
+<pre><code>    public void init(ServletConfig servletConfig) throws ServletException &#123;
+        System.out.println(&quot;初始化方法&quot;);
+//        1. 获取Servlet程序的别名（Servlet-name）的值
+        System.out.println(&quot;HelloServlet程序别名：&quot; + servletConfig.getServletName());
+//        2. 获取初始化参数init-param 略
+//        3. 获取ServletContext对象
+        System.out.println(servletConfig.getServletContext());
+
+    &#125;
+
+    public ServletConfig getServletConfig() &#123;
+        return null;
+    &#125;
+</code></pre>
+<p>注意重写init()方法要调用父类的init操作</p>
+<pre><code>&lt;!--    该标签给Tomcat配置Servlet程序--&gt;
+    &lt;servlet&gt;
+&lt;!--        name标签给Servlet程序起一个别名(一般都是用类名）--&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+&lt;!--        servlet-class是对应Servlet程序的全类名--&gt;
+        &lt;servlet-class&gt;com.fan.servlet.HelloServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+&lt;!--            参数名--&gt;
+            &lt;param-name&gt;usernmae&lt;/param-name&gt;
+            &lt;!--            参数值--&gt;
+            &lt;param-value&gt;root&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;init-param&gt;
+            &lt;!--            参数名--&gt;
+            &lt;param-name&gt;url&lt;/param-name&gt;
+            &lt;!--            参数值--&gt;
+            &lt;param-value&gt;jdbc:mysql://localhost:3306/test&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+&lt;!--    mapping标签的作用是给程序配置访问地址--&gt;
+    &lt;servlet-mapping&gt;
+&lt;!--        指定使用地址的Servlet程序--&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+&lt;!--        配置访问地址，/在服务器解析时表示地址为：http://ip:port/工程路径
+            /hello表示地址为：http://ip:port/工程路径/hello--&gt;
+        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+</code></pre>
+<h3 id="3-ServletContext类"><a href="#3-ServletContext类" class="headerlink" title="3.ServletContext类"></a>3.ServletContext类</h3><h4 id="（1）what-1"><a href="#（1）what-1" class="headerlink" title="（1）what?"></a>（1）what?</h4><ol>
+<li>Servlet是一个接口，表示Servlet上下文对象</li>
+<li>一个web工程仅有一个ServletContext对象实例</li>
+<li>ServletContext对象是一个<strong>域对象</strong></li>
+<li>ServletContext是在web工程部署启动时创建，工程停止即销毁</li>
+</ol>
+<p>什么是域对象</p>
+<p>像Map可以存取数据的对象，此处域指存取数据的操作范围，整个web工程。</p>
+<p>setAttribute() getAtrribute() removeAttribute() 存取删</p>
+<h4 id="四个作用"><a href="#四个作用" class="headerlink" title="四个作用"></a>四个作用</h4><ol>
+<li>获取web.xml中配置的上下文参数context-param</li>
+<li>获取当前工程路径，格式：&#x2F;工程路径</li>
+<li>获取部署在服务器硬盘上的绝对路径</li>
+<li>像Map一样存取数据</li>
+</ol>
+<p>测试：</p>
+<p>设置两个ContextServlet 都获取ServletContext对象并打印</p>
+<p>ContextServlet1</p>
+<pre><code>@WebServlet(name = &quot;ContextServlet1&quot;, urlPatterns = &quot;/getTest&quot;)
+public class ContextServlet1 extends HttpServlet &#123;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        //获取ServletContext对象
+        ServletContext context = getServletContext();
+        System.out.println(context);
+        System.out.println(&quot;保存前：context1获取key1的值是&quot; + context.getAttribute(&quot;key1&quot;));
+        context.setAttribute(&quot;key1&quot;, &quot;value1&quot;);
+        System.out.println(&quot;再次获取key1的值&quot; + context.getAttribute(&quot;key1&quot;));
+    &#125;
+&#125;
+</code></pre>
+<p>先运行ContextServlet2可以看到此时key1为null，请求CS1后再请求CS2则key1的值为value1，表明两个Servlet共同享有一个ServletContext对象。（打印出的地址也一样）</p>
+<pre><code>@WebServlet(name = &quot;ContextServlet2&quot;, urlPatterns = &quot;/getTest2&quot;)
+public class ContextServlet2 extends HttpServlet &#123;
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        //获取ServletContext对象
+        ServletContext context = getServletContext();
+        System.out.println(context);
+        System.out.println(&quot;保存前：context1获取key1的值是&quot; + context.getAttribute(&quot;key1&quot;));
+
+    &#125;
+&#125;
+</code></pre>
+<p>org.apache.catalina.core.ApplicationContextFacade@203d8bf6 保存前：context1获取key1的值是null 再次获取key1的值value1 org.apache.catalina.core.ApplicationContextFacade@203d8bf6 保存前：context1获取key1的值是value1</p>
+<hr>
+<h3 id="4-HTTP协议"><a href="#4-HTTP协议" class="headerlink" title="4.HTTP协议"></a>4.HTTP协议</h3><p><strong>http协议：指客户端和服务器之间通信时，发送的数据，需要遵守的规则。</strong></p>
+<p>该协议中的数据又称，报文</p>
+<h4 id="请求的HTTP协议格式："><a href="#请求的HTTP协议格式：" class="headerlink" title="请求的HTTP协议格式："></a>请求的HTTP协议格式：</h4><p>客户端给服务器发送数据叫请求，服务器给客户端回传叫响应</p>
+<p>请求又分为GET和POST</p>
+<h5 id="（1）GET请求"><a href="#（1）GET请求" class="headerlink" title="（1）GET请求"></a>（1）GET请求</h5><ul>
+<li><p>请求行</p>
+<ol>
+<li>请求的方式GET</li>
+<li>请求的资源路径 [ + ? + 请求参数]</li>
+<li>请求的协议的版本号</li>
+</ol>
+</li>
+<li><p>请求头</p>
+<p>key:value 组成不同的键值对，表示不同的含义</p>
+<p><img src="/" alt="image-20210621174253707"></p>
+</li>
+</ul>
+<h5 id="（2）POST请求"><a href="#（2）POST请求" class="headerlink" title="（2）POST请求"></a>（2）POST请求</h5><ul>
+<li><p>请求行</p>
+<ol>
+<li>请求的方式POST</li>
+<li>请求的资源路径 [ + ? + 请求参数]</li>
+<li>请求的协议的版本号</li>
+</ol>
+</li>
+<li><p>请求头</p>
+<p>key:value 组成不同的键值对，表示不同的含义</p>
+</li>
+<li><p>请求体 发送给服务器的数据</p>
+</li>
+</ul>
+<h5 id="（3）常用请求头的说明"><a href="#（3）常用请求头的说明" class="headerlink" title="（3）常用请求头的说明"></a>（3）常用请求头的说明</h5><ul>
+<li>Accept: 表示客户端可以接收的数据类型</li>
+<li>Accpet-Languege: 表示客户端可以接收的语言类型</li>
+<li>User-Agent: 表示客户端浏览器的信息</li>
+<li>Host： 表示请求时的服务器 ip 和端口号</li>
+</ul>
+<p>GET 请求：</p>
+<p>1、form 标签 method&#x3D;get</p>
+<p>2、a 标签</p>
+<p>3、link 标签引入 css</p>
+<p>4、Script 标签引入 js 文件</p>
+<p>5、img 标签引入图片</p>
+<p>6、iframe 引入 html 页面</p>
+<p>7、在浏览器地址栏中输入地址后敲回车</p>
+<p>POST 请求：</p>
+<p>8、form 标签 method&#x3D;post</p>
+<h4 id="响应行"><a href="#响应行" class="headerlink" title="响应行"></a>响应行</h4><p>(1) 响应的协议和版本号</p>
+<p>(2) 响应状态码</p>
+<p>(3) 响应状态描述符</p>
+<p>2、响应头</p>
+<p>key : value 不同的响应头，有其不同含义 空行</p>
+<p>3、响应体 —-&gt;&gt;&gt; 就是回传给客户端的数</p>
+<p><img src="/" alt="image-20210621174936895"></p>
+<p>常用响应码：</p>
+<p>200 表示请求成功 302 表示请求重定向</p>
+<p>404 表示<strong>请求服务器已经收到了</strong>，但是你要的数据不存在（请求地址错误）</p>
+<p>500 表示服务器已经收到请求，但是服务器内部错误（代码错误）</p>
+<p>补充：</p>
+<h3 id="转发与重定向"><a href="#转发与重定向" class="headerlink" title="转发与重定向"></a>转发与重定向</h3><p>request.getRequestDispatcher().forward()：将请求转发给<strong>同一个WEB应用</strong>中的组件</p>
+<p>response.sendRedirect()方法不仅可以重定向到当<strong>前应用程序</strong>中的其他资源还可重定向同一站点上其他应用程序中的资源，甚至使用绝对URL重定向到其他站点的资源。</p>
+<p>如果传递给response.sendRedirect()方法的相对URL以“&#x2F;”开头，它是相对于整个WEB站点的根目录；如果创建request.getRequestDispatcher()对象时指定的相对URL以“&#x2F;”开头，它是相对于当前WEB应用程序的根目录。 ·</p>
+<p>重定向访问后Url会变，请求转发结束后保持初始Url地址不变。</p>
+<p>sendRedirect()对请求直接作出响应，告诉浏览器重新发出对另一个url的访问请求。（浏览器清楚</p>
+<p>forward()方法在服务器内部将请求转发给服务器内部另一资源，浏览器得到了响应结果。（浏览器不清楚转发</p>
+<p>request.getRequestDispatcher().forward()方法的调用者与被调用者间共享相同的request对象和response对象，因为同属一个访问请求和响应过程。</p>
+<p>而response.sendRedirect()方法调用者与被调用者使用各自的request对象和response对象，因为属于两个独立的访问请求和响应过程。</p>
+<p>转发和跳转的小结</p>
+<pre><code>1、转发使用的是getRequestDispatcher()方法;重定向使用的是sendRedirect();
+  2、转发：浏览器URL的地址栏不变。重定向：浏览器URL的地址栏改变；
+
+  3、转发是服务器行为，重定向是客户端行为；
+
+  4、转发是浏览器只做了一次访问请求。重定向是浏览器做了至少两次的访问请求；
+
+  5、转发2次跳转之间传输的信息不会丢失，重定向2次跳转之间传输的信息会丢失（request范围）。
+</code></pre>
+
+  </div>
+  <div id=""></div>
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2024/01/08/hello-world/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>Hello World</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2024/01/08/LSS/mybaits/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Mybatis-9.28</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2024 By SoftLipa. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: rgba(18, 24, 58, 0.06);
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        if(Boolean('false')){
+            gitalk.render('gitalk-container')
+        }
+    </script>
+
+<script>
+	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+</script>
+	</body>
+</html>
+

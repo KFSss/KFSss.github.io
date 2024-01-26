@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+<title>Hexo+gitee搭建指南-🧠</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" type="image/x-icon" href="/image/dragon.ico">
+
+<link rel="stylesheet" href="/css/index.css">
+
+
+
+<meta name="keywords" content="Hexo,Gitee,指南,">
+<meta name="description" content="如何搭建Hexo+Gitee个人静态博客">
+
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/index.js"></script>
+
+
+<script src="/js/fancybox.umd.js"></script>
+
+
+<script src="/js/fancybox-images.js"></script>
+
+
+<script src="/js/gitalk.min.js"></script>
+
+
+<script src="/js/hljs.min.js"></script>
+ 
+<script>hljs.highlightAll();</script>
+
+	<meta name="generator" content="Hexo 6.3.0"></head>
+
+	<body>
+		
+	<div class="header">
+		<div class="header-top" id="header-top">
+			<div class="h-left">
+				<a href="/">
+					<img src="/image/dragon.png" alt="Quiet">
+				</a>
+			</div>
+			<div class="h-right">
+				<ul>
+					
+						
+								<li>
+									<a href="/">
+										主页
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/archives">
+										文档
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/categories">
+										分类
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/tags">
+										标签
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/links">
+										友情链接
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+						
+								<li>
+									<a href="/about">
+										我
+									</a>
+									<span class="dot"></span>
+								</li>
+								
+									
+				</ul>
+			</div>
+			<div class="h-right-close">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+					<path fill="none" d="M0 0h24v24H0z" />
+					<path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z" fill="rgba(68,68,68,1)" />
+				</svg>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar">
+    <div class="topo">
+        <h2>SoftLipa</h2>
+    </div>
+    <ul>
+        
+        <li>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <a href="/archives">文档</a>
+        </li>
+        
+        <li>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <a href="/links">友情链接</a>
+        </li>
+        
+        <li>
+            <a href="/about">我</a>
+        </li>
+        
+    </ul>
+    <div class="my_foot">
+        
+        <a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+            <img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+        </a>
+        
+    </div>
+</div>
+<div class='shelter'>
+</div>
+<style>
+    .shelter{
+        background-color: #333;
+        opacity:0.5;
+        cursor: pointer;
+        display: none; 
+        position: fixed;
+        left: 0;
+        top: 0; 
+        right: 0;
+        bottom: 0;
+        z-index: 1998;
+    }
+    .sidebar {
+        width: 66%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        background: #fff;
+        z-index: 1999;
+        text-align: center;
+        box-shadow: -6px 0 20px rgba(98, 94, 94, .815);
+    }
+
+    .topo {
+        width: 100%;
+        height: 200px;
+        background: url(https://api.ixiaowai.cn/gqapi/gqapi.php) no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        display: flex;
+        align-items: flex-end
+    }
+
+    .topo h2 {
+        color: #fff;
+        z-index: 1;
+        position: relative;
+        margin: 0 0 10px 10px;
+        font-size: 1.2em;
+        box-sizing: border-box
+    }
+
+    .topo:before {
+        content: '';
+        background-image: url(/image/pattern.png);
+        background-repeat: repeat;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 1
+    }
+
+    .sidebar ul {
+        width: 100%;
+        margin-top: 50px
+    }
+
+    .sidebar ul li {
+        height: 50px;
+        list-style: none;
+        font-size: 1.2em;
+        text-align: right;
+        margin-right: 10px
+    }
+
+    .sidebar ul li a {
+        display: grid;
+        color: #5d606a;
+        text-overflow: ellipsis;
+        width: 100%;
+        text-decoration: none
+    }
+
+    .my_foot {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        position: absolute;
+        bottom: 0
+    }
+
+    .my_foot a {
+        text-decoration: none;
+        margin-right: 10px;
+        display: inline-block
+    }
+
+    .my_foot a img {
+        width: 30px;
+        height: 30px
+    }
+</style>
+
+<script>
+    $( function () {
+	$( '.h-right-close>svg' )
+		.click( function () {
+			$( '.sidebar' )
+				.animate( {
+					right: "0"
+				}, 500 );
+			$( '.shelter' )
+				.fadeIn( "slow" )
+		} );
+	$( '.shelter' )
+		.click( function ( e ) {
+			$( '.sidebar' )
+				.animate( {
+					right: "-100%"
+				}, 500 );
+			$( '.shelter' )
+				.fadeOut( "slow" )
+		} )
+} )
+
+</script>
+
+<div class="post">
+    <div class="post-header-background post-header-img"
+    style="background: url('https://tu.ltyuanfang.cn/api/fengjing.php')" 
+>
+    <div class="post-header-background-content">
+        <ul class="post-header-tag">
+            
+            
+            <li><a href="/tags/Hexo">Hexo</a></li>
+            
+            <li><a href="/tags/Gitee">Gitee</a></li>
+            
+            <li><a href="/tags/指南">指南</a></li>
+            
+            
+        </ul>
+        
+        <h1>Hexo+gitee搭建指南</h1>
+        <div class="post-header-info">
+            <div class="post-header-info-author">
+                
+                    <svg t="1604839279282" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="2901" width="20" height="20">
+                        <path
+                            d="M513 956.3c-247.7 0-448-200.3-448-448S265.3 66.2 513 66.2s448 200.3 448 448-200.3 442.1-448 442.1z m0-830.9c-212.2 0-388.8 170.7-388.8 388.8C124.2 726.3 294.9 903 513 903c212.2 0 388.8-170.7 388.8-388.8S725.2 125.4 513 125.4z m0 430.2c-94.2 0-170.7-76.5-170.7-170.7S418.8 207.8 513 207.8s170.7 76.5 170.7 170.7S607.2 555.6 513 555.6z m0-289.1c-64.6 0-112 52.8-112 112s47.4 117.9 112 117.9 112-52.8 112-112-47.4-117.9-112-117.9z m0 689.8c-135.7 0-259-58.7-341.9-158.9l-11.8-17.8 11.8-17.8c76.5-117.9 206.2-188.5 347.8-188.5 135.7 0 265 64.6 341.9 182.6l11.8 17.8-11.8 17.8C778 897.1 648.7 956.3 513 956.3zM230.3 773.2C300.9 849.7 406.9 897 513 897c112 0 218.1-47.4 288.6-129.8-70.5-88.2-170.7-135.6-282.7-135.6s-218.1 53.3-288.6 141.6z"
+                            p-id="2902" fill="#ffffff"></path>
+                    </svg>
+                    
+                <span class="post-header-info-author-text"> <a href="../../about">SoftLipa</a></span>
+                <div class="post-header-info-author-categories">
+                    
+                         <a href="../../categories/入站指南/" target="_blank" >入站指南</a>
+                    
+                </div>
+                <p>2024-01-08 09:33:36</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="post-content" id="content">
+  
+  <div id="article" class="post-content-info">
+    
+
+    <h4 id="所需的软件和平台"><a href="#所需的软件和平台" class="headerlink" title="所需的软件和平台"></a>所需的软件和平台</h4><h5 id="各自的官网"><a href="#各自的官网" class="headerlink" title="各自的官网"></a>各自的官网</h5><p>必须的软件：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="http://nodejs.cn/download/">node.js</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://git-scm.com/">Git</a></strong> 或者 <strong><a target="_blank" rel="noopener" href="https://npm.taobao.org/mirrors/git-for-windows/">Git镜像站</a></strong></li>
+</ul>
+<p>可根据个人喜好替换的软件：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download">Visual Studio Code</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://www.typora.io/">Typora</a></strong></li>
+</ul>
+<blockquote>
+<p>以上软件若你下载速度慢，可以在这个文章底部找到我已经下载好的链接，链接里<strong>不定期</strong>更新以上软件的版本，均为从官网下载下来，不搞什么虚头巴脑的东西。</p>
+</blockquote>
+<p>要用到的框架或平台：</p>
+<ul>
+<li><strong><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://gitee.com/">码云（Gitee）</a></strong></li>
+</ul>
+<h5 id="安装说明"><a href="#安装说明" class="headerlink" title="安装说明"></a>安装说明</h5><p>node.js和Typora就不说了，这个灰常简单。</p>
+<p>至于Git，它安装的时候选项挺多的，而且还都是洋文，看不懂的话就全部 next 就行了。你要是非得搞明白它每个选项的意思，emmmm你们自己去搜吧，网上有很多。</p>
+<p>VsCode安装好之后默认是英文界面，可以在插件市场里搜索chinese，然后安装之后重启软件，就是中文版了。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200823155758666.png" alt="VsCode设置中文"></p>
+<h5 id="检验是否成功安装"><a href="#检验是否成功安装" class="headerlink" title="检验是否成功安装"></a>检验是否成功安装</h5><p>用 <strong>Win + R</strong> 打开运行，输入 <strong>cmd</strong> 并进入cmd</p>
+<p><strong>node.js</strong> 的检查</p>
+<pre><code>COPYnode -v
+</code></pre>
+<p><strong>npm</strong> 的检查</p>
+<blockquote>
+<p>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题</p>
+</blockquote>
+<pre><code>COPYnpm -v
+</code></pre>
+<p><strong>Git</strong> 的检查</p>
+<pre><code>COPYgit --version
+</code></pre>
+<p>以上有显示版本号，则说明安装成功</p>
+<h4 id="Hexo的安装"><a href="#Hexo的安装" class="headerlink" title="Hexo的安装"></a>Hexo的安装</h4><p>1、安装之前可以先设置一下淘宝镜像加速器</p>
+<pre><code>COPYnpm install -g cnpm --registry=https://registry.npm.taobao.org
+</code></pre>
+<p>2、全局安装框架</p>
+<pre><code>COPYnpm install hexo-cli -g
+</code></pre>
+<p>3.1、创建你的博客目录</p>
+<pre><code>COPYhexo init 你博客的文件夹名字
+</code></pre>
+<p>3.2、进入你博客的目录</p>
+<pre><code>COPYcd 你博客的文件夹名字
+</code></pre>
+<p>4、复制文件到你博客的目录</p>
+<pre><code>COPYnpm install
+</code></pre>
+<p>5、安装Hexo部署插件</p>
+<p>请在你博客的目录下启动cmd，再执行以下代码</p>
+<pre><code>COPYnpm install hexo-deployer-git --save
+</code></pre>
+<h4 id="Git的配置"><a href="#Git的配置" class="headerlink" title="Git的配置"></a>Git的配置</h4><p>用 <strong>Win + R</strong> 打开运行，输入 <strong>cmd</strong> 并进入cmd</p>
+<p>设置用户名称</p>
+<pre><code>COPYgit config --global user.name &quot;用户名&quot;
+</code></pre>
+<p>设置用户邮箱</p>
+<pre><code>COPYgit config --global user.email &quot;用户邮箱&quot;
+</code></pre>
+<p>生成密钥</p>
+<pre><code>COPYssh-keygen -t rsa -C &quot;用户邮箱&quot;
+</code></pre>
+<p>以上代码执行之后，会让你设置密码，推荐全都不要设置，直接连按三次回车键。</p>
+<h4 id="博客-config-yml-文件的配置"><a href="#博客-config-yml-文件的配置" class="headerlink" title="博客 _config.yml 文件的配置"></a>博客 _config.yml 文件的配置</h4><p>打开你博客根目录的 _config.yml 文件，将一下信息添加到里面去。</p>
+<pre><code>COPYdeploy:
+  type: git
+  repo: https://gitee.com/hcllmsx/hcllmsx.git    #替换成你自己仓库的HTTP URL地址
+  branch: master
+</code></pre>
+<blockquote>
+<p>注意区分，你博客根目录的 _config.yml 文件，和主题根目录的 _config.yml 文件！</p>
+</blockquote>
+<h4 id="Hexo常用代码"><a href="#Hexo常用代码" class="headerlink" title="Hexo常用代码"></a>Hexo常用代码</h4><p>1、清理缓存</p>
+<pre><code>COPYhexo cl
+</code></pre>
+<blockquote>
+<p>hexo cl 是 hexo clean 的简写</p>
+</blockquote>
+<p>2、生成静态页面</p>
+<pre><code>COPYhexo g
+</code></pre>
+<blockquote>
+<p>hexo g 是 hexo generate 的简写</p>
+</blockquote>
+<p>3、在本地映射（预览）</p>
+<pre><code>COPYhexo s
+</code></pre>
+<blockquote>
+<p>hexo s 是 hexo server 的简写</p>
+</blockquote>
+<p>4、部署推送</p>
+<pre><code>COPYhexo d
+</code></pre>
+<blockquote>
+<p>hexo d 是 hexo deploy 的简写</p>
+</blockquote>
+
+  </div>
+  <div id=""></div>
+</div>
+
+<script>
+  
+Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
+  dragToClose: true,
+  Toolbar: true,
+  closeButton: "top",
+  Image: {
+    zoom: true,
+  },
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+<style>
+    #noneimg img {
+        display: none;
+        z-index: 9999;
+        /* width: 600px !important; */
+        min-width: 0%;
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 0px;
+        position: fixed;
+        box-shadow: 0 0 0px #c3c3c300 !important;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto !important;
+    }
+
+    @media screen and (max-width:600px) {
+        #noneimg img {
+            max-width: 88%
+        }
+    }
+</style>
+
+    <div class="post-paging">
+    
+    <a href="/2024/01/09/ChatGPT%E9%97%AE%E7%AD%94/spring&mybatis%20q&a/spring&mybatis%20q&a01/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>spring&amp;mybatis GPT&#39;s q&amp;a</p>
+        </div>
+    </a>
+    
+
+    
+    <a href="/2024/01/08/hello-world/">
+        <div class="post-paging-next">
+            <span>下一篇</span>
+            <p>Hello World</p>
+        </div>
+    </a>
+    
+</div>
+</div>
+		
+<div class="footer">
+	<div class="Copyright">
+		©2024 By SoftLipa. 主题：<a
+			style="text-decoration: none;display: contents; color: #898F9F;"
+			target="_blank" rel="noopener" href="https://github.com/79e/hexo-theme-quiet">Quiet</a>
+	</div>
+	<div class="contact">
+		
+		<a target="_blank" rel="noopener" href="https://github.com/79E/hexo-theme-quiet">
+			<img src="https://cdn.jsdelivr.net/gh/duogongneng/MyBlogImg/imggithub.png" alt="Quiet主题">
+		</a>
+		
+	</div>
+</div>
+
+<script src="/js/gotop.js"></script>
+
+
+<style type="text/css">
+    @media screen and (min-width: 600px) {
+        .goTop>span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            opacity: 0.8;
+            background: rgba(18, 24, 58, 0.06);
+            text-align: center;
+            transition: border .5s;
+            border: 1px solid rgba(18, 24, 58, 0.06);
+
+            -moz-transition: border .5s;
+            /* Firefox 4 */
+            -webkit-transition: border .5s;
+            /* Safari 和 Chrome */
+            -o-transition: border .5s;
+            /* Opera */
+        }
+
+        .goTop>span:hover {
+            border: 1px solid #6680B3;
+        }
+
+
+        .goTop {
+            position: fixed;
+            right: 30px;
+            bottom: 80px;
+        }
+
+        .goTop>span>svg {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+    }
+
+    @media screen and (max-width: 600px) {
+        .goTop {
+            display: none;
+        }
+    }
+</style>
+<div class="goTop" id="js-go_top">
+    <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <g>
+                <path d="M13 12v8h-2v-8H4l8-8 8 8z"></path>
+            </g>
+        </svg>
+    </span>
+</div>
+<script>
+    $( '#js-go_top' )
+	.gotoTop( {
+		offset: 500,
+		speed: 300,
+		animationShow: {
+			'transform': 'translate(0,0)',
+			'transition': 'transform .5s ease-in-out'
+		},
+		animationHide: {
+			'transform': 'translate(100px,0)',
+			'transition': 'transform .5s ease-in-out'
+		}
+	} );
+</script>
+
+
+    <!-- Gitalk -->
+    <script>
+        const data = '{"clientID":"02b3c","clientSecret":"adfc7b4","repo":"gimment","owner":"duneng","admin":"duneng"}'
+        const gitalk = new Gitalk({
+            ...JSON.parse( data),
+            id:location.pathname,
+            distractionFreeMode:false
+        })
+        
+        if(Boolean('false')){
+            gitalk.render('gitalk-container')
+        }
+    </script>
+
+<script>
+	console.log('\n %c Hexo-Quiet 主题 %c https://github.com/79e/hexo-theme-quiet \n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;')
+</script>
+	</body>
+</html>
+
