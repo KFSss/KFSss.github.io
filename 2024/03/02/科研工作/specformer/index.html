@@ -310,7 +310,7 @@
                          <a href="../../categories/科研工作/" target="_blank" >科研工作</a>
                     
                 </div>
-                <p>2024-03-02 20:38:10</p>
+                <p>2024-03-02 19:51:17</p>
             </div>
         </div>
     </div>
@@ -321,7 +321,8 @@
     
 
     <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><ul>
-<li>pip install -i <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> -r requirements.txt，官方环境并不完整，还需要安装以下依赖<ul>
+<li><p>pip install -i <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> -r requirements.txt，官方环境并不完整，还需要安装以下依赖</p>
+<ul>
 <li>pip install -i <a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple">https://pypi.tuna.tsinghua.edu.cn/simple</a> rdkit</li>
 <li>pip install torch_cluster-1.6.0+pt113cu117-cp310-cp310-linux_x86_64.whl</li>
 <li>pip install torch_sparse-0.6.17+pt113cu117-cp310-cp310-linux_x86_64.whl</li>
@@ -329,18 +330,43 @@
 <li>以上依赖地址<a target="_blank" rel="noopener" href="https://data.dgl.ai/wheels/repo.html">data.dgl.ai&#x2F;wheels&#x2F;repo.html</a></li>
 </ul>
 </li>
-<li>之后会遇到dgl库版本不匹配的问题<ul>
-<li>因为requirements.txt文件中的dgl库是cpu版本，我们需要torch1.13+cuda117版本的dgl库</li>
+<li><p>之后会遇到dgl库版本不匹配的问题</p>
+<ul>
+<li>因为requirements.txt文件中的dgl库是cpu版本，需要torch1.13+cuda117版本的dgl库</li>
 <li>安装前要先删除原来的dgl库 pip uninstall dgl</li>
 <li>pip install dgl-cu113 -f <a target="_blank" rel="noopener" href="https://data.dgl.ai/wheels/repo.html">https://data.dgl.ai/wheels/repo.html</a></li>
 </ul>
 </li>
-<li>之后又会报OSError: libcusparse.so.11: cannot open shared object file: No such file or directory<ul>
-<li>参考以下文档解决<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2139512">成功解决 OSError: libcusparse.so.11: cannot open shared object file: No such file or directory-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
-<li>手动下载了libcusparse.so.11，并放置到python的site库中即可</li>
+<li><p>之后又会报OSError: libcusparse.so.11: cannot open shared object file: No such file or directory</p>
+<ul>
+<li><p>参考以下文档解决<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2139512">成功解决 OSError: libcusparse.so.11: cannot open shared object file: No such file or directory-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+<li><p>手动下载了<code>libcusparse.so.11</code>，并放置到python的site库中即可</p>
+</li>
+<li><p>此时并未成功解决，还存在动态链接库路径问题，确保系统能够找到 <code>libcusparse.so.11</code>。</p>
+<ul>
+<li>使用以下命令检查动态链接库的路径:</li>
+</ul>
+<pre><code class="bash">sudo ldconfig -p | grep libcusparse.so.11
+</code></pre>
+<ul>
+<li>如果没有输出，表示系统找不到该库文件。你可以尝试将库文件路径添加到动态链接库搜索路径中：</li>
+</ul>
+<pre><code class="bash">sudo echo &quot;/usr/local/lib/python3.10/dist-packages/&quot; &gt;&gt; /etc/ld.so.conf.d/local.conf
+sudo ldconfig
+</code></pre>
+<ul>
+<li>再使用以下命令检查动态链接库的路径：</li>
+</ul>
+<pre><code class="bash">sudo ldconfig -p | grep libcusparse.so.11
+</code></pre>
+</li>
+<li><p>此时已经解决OSError问题</p>
+</li>
 </ul>
 </li>
-<li>成功运行前的最后一个问题可能会报没有checkpoint目录，直接在运行目录当级创建一个checkpoint目录</li>
+<li><p>成功运行前的最后一个问题可能会报没有checkpoint目录，直接在运行目录当级创建一个checkpoint目录</p>
+</li>
 </ul>
 <hr>
 
@@ -402,6 +428,13 @@ Fancybox.bind('[data-fancybox="fancybox-gallery-img"]', {
 </style>
 
     <div class="post-paging">
+    
+    <a href="/2024/04/04/Java-Interview/">
+        <div class="post-paging-last">
+            <span>上一篇</span>
+            <p>JAVA面试八股</p>
+        </div>
+    </a>
     
 
     
